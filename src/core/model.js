@@ -28,6 +28,7 @@ class Model {
             _id: ObjectId(id)
         });
     }
+
 }
 
 module.exports = Model;

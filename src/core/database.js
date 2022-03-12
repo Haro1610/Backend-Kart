@@ -4,6 +4,7 @@ const mongoUrl = 'mongodb+srv://kartsuser:Q8Tc4BdZM72mSUrl@kartapp.qvkrj.mongodb
 
 const Database = {
     dbInstance: null,
+ 
     connect: () => {
         return new Promise((accept, reject) => {
             MongoClient.connect(mongoUrl, { useUnifiedTopology: true }, (err, client) => {
@@ -18,7 +19,7 @@ const Database = {
     },
     collection: (name) => {
         return this.dbInstance.collection(name);
-    }
+    },
 };
 
 module.exports = Database;

@@ -1,3 +1,4 @@
+const Database = require("../../core/database");
 const User = require("./user.model");
 
 const UsersController = {
@@ -18,7 +19,19 @@ const UsersController = {
         });
     },
     create: (req, res) => {
-        res.send('create user');
+        const new_user = {
+            email: req.body.email,
+            name:  req.body.name,
+            birthdate: req.body.birthdate
+        };
+        Database.collection("users").insertOne(new_user, function(err, res) {
+        if(err) console.log("err");
+        else console.log("Todo bien")
+    });
+    res.send("Todo bien");
+    //delete: (req,res) =>{
+        
+    //}
     }
 }
 
