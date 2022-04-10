@@ -9,6 +9,8 @@ const Database = require('./src/core/database');
 
 const app = express(); 
 
+
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -22,6 +24,26 @@ app.use('/api',raceRouter);
 app.get('/', (req, res) => {
     res.send('this api works!');
 });
+
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+// Swagger Config
+const swaggerOptions = {
+    swaggerDefinition: {
+        swagger: '2.0',
+        info: {
+            title: 'Kart Raing!',
+            description: 'A Race-Pilot server',
+            version: '1.0.0',
+            servers: ['http://localhost:'+port]
+        }
+    },
+    apis: ['./src/modules/**/*.routes.js']
+}
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 Database.connect().then(() => {

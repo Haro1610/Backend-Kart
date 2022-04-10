@@ -10,7 +10,7 @@ const circuitController = {
     },
     getOne: (req, res) => {
         const circuit = new Circuit();
-        user.getOne(req.params.id).then(result => {
+        circuit.getOne(req.params.id).then(result => {
             if(result) {
                 res.send(result);
             } else {
@@ -20,15 +20,15 @@ const circuitController = {
     },
     create: (req, res) => {
         const new_circuit = {
-            name:  req.body.name,
-            address: req.body.address,
-            phone_number : req.body.phone_number,
-            circuit_distance: req.body.circuit_distance
+            name:  req.headers.name,
+            address: req.headers.address,
+            phone_number : req.headers.phone,
+            circuit_distance: req.headers.distance
         };
         console.log(new_circuit)
         Database.collection("circuits").insertOne(new_circuit, function(err, res) {
-        if(err) console.log("err");
-        else console.log("Todo bien")
+            if(err) console.log("err");
+            else console.log("Todo bien");
     });
     res.send("Todo bien");
     //delete: (req,res) =>{

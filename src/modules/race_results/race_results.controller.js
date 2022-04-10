@@ -10,7 +10,7 @@ const race_resultController = {
     },
     getOne: (req, res) => {
         const race_result = new Race_result();
-        user.getOne(req.params.id).then(result => {
+        race_result.getOne(req.params.id).then(result => {
             if(result) {
                 res.send(result);
             } else {
@@ -20,11 +20,11 @@ const race_resultController = {
     },
     create: (req, res) => {
         const new_race_result = {
-            results:  req.body.results,
-            number_of_laps: req.body.number_of_laps,
-            race_id: req.body.race_id,
-            race_name: req.body.race_name,
-            date: req.body.date
+            results:  req.headers.results,
+            number_of_laps: req.headers.number_of_laps,
+            race_id: req.headers.race_id,
+            race_name: req.headers.race_name,
+            date: req.headers.date
         };
         console.log(new_race_result)
         Database.collection("race_results").insertOne(new_race_result, function(err, res) {

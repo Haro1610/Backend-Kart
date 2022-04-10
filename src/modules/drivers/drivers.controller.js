@@ -10,7 +10,7 @@ const driversController = {
     },
     getOne: (req, res) => {
         const driver = new Driver();
-        user.getOne(req.params.id).then(result => {
+        driver.getOne(req.params.id).then(result => {
             if(result) {
                 res.send(result);
             } else {
@@ -20,15 +20,15 @@ const driversController = {
     },
     create: (req, res) => {
         const new_driver = {
-            name:  req.body.name,
-            birthdate: req.body.birthdate,
-            number: req.body.number,
-            picture: req.body.picture
+            name:  req.headers.name,
+            birthdate: req.headers.birthdate,
+            number: req.headers.number,
+            picture: req.headers.picture
         };
         console.log(new_driver)
         Database.collection("drivers").insertOne(new_driver, function(err, res) {
         if(err) console.log("err");
-        else console.log("Todo bien")
+        else console.log("Todo bien");
     });
     res.send("Todo bien");
     //delete: (req,res) =>{
