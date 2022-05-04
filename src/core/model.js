@@ -29,6 +29,13 @@ class Model {
         });
     }
 
+    find(id){
+        console.log("Lets find: "+id)
+        return this.collection.findOne({
+            race_id: id
+        })
+    }
+
 }
 
 module.exports = Model;

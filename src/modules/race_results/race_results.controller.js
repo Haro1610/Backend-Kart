@@ -10,7 +10,8 @@ const race_resultController = {
     },
     getOne: (req, res) => {
         const race_result = new Race_result();
-        race_result.getOne(req.params.id).then(result => {
+        race_result.find(req.params.id).then(result => {
+            console.log(req.params.id)
             if(result) {
                 res.send(result);
             } else {
