@@ -23,10 +23,25 @@ class Model {
         });
     }
 
-    getOne(id) {
-        return this.collection.findOne({
-            _id: ObjectId(id)
+    getOne(any) {
+        if (!any.email){
+            console.log(any)
+            console.log("Entrando por id")
+            return this.collection.findOne({
+                _id: ObjectId(any)
+            });
+        }
+        else{ 
+            console.log("Preparando para buscar por email")
+            return this.collection.findOne({
+            email: any.email,
+            password: any.password
         });
+        }
+    }
+
+    updateOne(query, update) {
+        return this.collection.updateOne(query, updateOperations, options);
     }
 
     find(id){
