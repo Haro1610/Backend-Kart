@@ -14,6 +14,7 @@ const circuitController = {
             if(result) {
                 res.send(result);
             } else {
+                console.log("No hay circuito")
                 res.sendStatus(404);
             }
         });
