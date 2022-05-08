@@ -42,7 +42,7 @@ class Model {
 
     updateOne(query, update) {
         return this.collection.updateOne(query, updateOperations, options);
-    }
+      }
 
     find(id){
         console.log("Lets find: "+id)

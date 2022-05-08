@@ -39,19 +39,19 @@ router.get('/Circuits/:id',circuitController.getOne);
   *       - Circuits
   *       description: Create a Circuit
   *       parameters:
-  *         - in: header
+  *         - in: body
   *           name: name
   *           required: true
   *           description: Name of the circuit
-  *         - in: header
+  *         - in: body
   *           name: address
   *           required: true
   *           description: The real address of the circuit
-  *         - in: header
+  *         - in: body
   *           name: phone
   *           required: true
   *           description: a phone number to contact with the circuit managers
-  *         - in: header
+  *         - in: body
   *           name: distance
   *           required: true
   *           description: The circuit distance, measured in kilometers
