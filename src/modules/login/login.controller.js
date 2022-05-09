@@ -20,7 +20,7 @@ const LogInController = {
           }
         );
         //res.sendStatus(200);
-        res.send({mensaje: "Todo bien carnalito" })
+        res.send({token: "si" })
       } else {
         res.sendStatus(404);
       }
