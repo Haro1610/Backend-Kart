@@ -24,7 +24,9 @@ const raceController = {
             "number_of_laps": req.headers.number_of_laps,
             "date": req.headers.date,
             "circuit": req.headers.circuit, 
-            "drivers": req.headers.drivers
+            "drivers": req.headers.drivers,
+            "capacity": req.headers.capacity,
+            "status": "open"
         };
         Database.collection("races").insertOne(new_race, function(err, res) {
         if(err) console.log("err");
