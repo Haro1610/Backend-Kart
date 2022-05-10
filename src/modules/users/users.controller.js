@@ -20,15 +20,15 @@ const UsersController = {
     },
     create: (req, res) => {
         const new_user = {
+            username:  req.body.username,
             email: req.body.email,
-            name:  req.body.name,
-            birthdate: req.body.birthdate
+            password: req.body.password
         };
         Database.collection("users").insertOne(new_user, function(err, res) {
         if(err) console.log("err");
         else console.log("Todo bien")
     });
-    res.send("Todo bien");
+    res.send({token: "si" })
     //delete: (req,res) =>{
         
     //}
