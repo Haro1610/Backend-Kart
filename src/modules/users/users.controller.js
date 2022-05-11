@@ -22,7 +22,9 @@ const UsersController = {
         const new_user = {
             username:  req.body.username,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            number: req.body.number,
+            picture: req.body.picture
         };
         Database.collection("users").insertOne(new_user, function(err, res) {
         if(err) console.log("err");
