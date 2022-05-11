@@ -48,6 +48,7 @@ const circuitController = {
     update: (req,res) => {
         console.log("Vamos a actualizar: " + req.body.name );
         const updated_circuit = {
+            _id: req.body.id,
             name:  req.body.name,
             description: req.body.description,
             address: req.body.address,
@@ -55,8 +56,8 @@ const circuitController = {
             circuit_distance: req.body.circuit_distance
         };
         Database.collection("circuits").updateOne(
-        {_id: ObjectId(req.params.id)},
-        { $set: { "name" : updated_circuit.name , "description" : updated_circuit.description,"address": updated_circuit.address,"phone_number": req.body.phone, "circuit_distance":updated_circuit.distance}},
+        {_id: ObjectId(req.body.id)},
+        { $set: { "name" : updated_circuit.name , "description" : updated_circuit.description,"address": updated_circuit.address,"phone_number": req.body.phone_number, "circuit_distance":updated_circuit.circuit_distance}},
         function(err, res) {
             if (err){
                 console.log(err)
