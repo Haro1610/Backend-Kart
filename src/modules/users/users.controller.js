@@ -42,7 +42,6 @@ const UsersController = {
     },
     update: (req,res) => {
         console.log("Vamos a actualizar: " + req.body.email +'  number: ' + req.body.number );
-        
         const updated_user = {
             username:  req.body.username,
             email: req.body.email,

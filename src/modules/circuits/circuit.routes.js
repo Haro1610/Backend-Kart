@@ -59,7 +59,8 @@ router.get('/Circuits/:id',circuitController.getOne);
   *         200:
   *           description: An object with a single message's data
   */
-
 router.post('/Circuits',circuitController.create);
+router.delete('/circuits/:id',circuitController.delete);
+
 //router.delete('./users',userController.delete);
 module.exports = router;
