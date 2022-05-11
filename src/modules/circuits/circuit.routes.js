@@ -61,6 +61,5 @@ router.get('/Circuits/:id',circuitController.getOne);
   */
 router.post('/Circuits',circuitController.create);
 router.delete('/circuits/:id',circuitController.delete);
-
-//router.delete('./users',userController.delete);
+router.put('/circuits',circuitController.update);
 module.exports = router;
