@@ -55,5 +55,9 @@ router.get('/users/:id',userController.getOne);
   *           description: An object with a single message's data
   */
 router.post('/users',userController.create);
+
+router.delete('/users/:email',userController.delete);
+
+router.put('/users',userController.update)
 //router.delete('./users',userController.delete);
 module.exports = router;
