@@ -1,5 +1,6 @@
 const Database = require("../../core/database");
 const Circuit = require("./circuit.model");
+const { ObjectId } = require('mongodb');
 
 const circuitController = {
     getAll: (req, res) => {
@@ -32,9 +33,16 @@ const circuitController = {
             else console.log("Todo bien");
     });
     res.send("Todo bien");
-    //delete: (req,res) =>{
-        
-    //}
+    },
+    delete: (req,res) => {
+        console.log("vamos a borrar a :" +req.params.id)
+        Database.collection("circuits").deleteOne({_id: ObjectId(req.params.id)},function(err, res) {
+        if (err){
+            console.log(err)
+            res.send({status: "Not Deleted"})
+        }
+    });
+    res.send({status: "Ok, hemos borrado a: "+req.params.id})
     }
 }
 
