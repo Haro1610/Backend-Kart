@@ -23,7 +23,7 @@ const LogInController = {
           }
         );
         //res.sendStatus(200);
-        res.send({token: "si" })
+        res.send({token: "si" ,username: usuario.username})
       } else {
         res.sendStatus(404);
       }

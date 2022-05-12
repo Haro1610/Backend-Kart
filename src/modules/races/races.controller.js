@@ -81,6 +81,44 @@ const raceController = {
                 console.log("los corredores iniciales son:" + result.drivers)
                 result.drivers.push(req.body.username);
                 console.log("Y al final son: "+ result.drivers)
+                modified_obj = {}
+                if((result.capacity - result.drivers.length) === 0){
+                    modified_obj = { "drivers" : result.drivers, "status":"closed"}
+                }
+                else modified_obj = { "drivers" : result.drivers}
+                Database.collection("races").updateOne(
+                    {_id: ObjectId(req.params.id)},
+                    { $set: modified_obj},
+                    function(err, res) {
+                        if (err){
+                            console.log(err)
+                            res.send({message: "Not updated"})
+                        }
+                    });
+                console.log(modified_obj)
+            } else {
+                res.send({message:"No se encuentra la carrera"});
+            }
+        });
+        console.log("Añadido a la carrera")
+        res.send({message:"Bienvenido a la carrera"})
+    },
+    leftRace:(req,res) => {
+        console.log("carrera a la que te desuscribirás:"+req.params.id);
+        const race = new Race();
+        race.getOne(req.params.id).then(result => {
+            if(result) {
+                console.log("k onda, tu eres:"+ req.body.username)
+                console.log("los corredores iniciales son:" + result.drivers)
+                modified_obj = {}
+                if((result.capacity - result.drivers.length) === 0){
+                    modified_obj = { "drivers" : result.drivers, "status":"open"}
+                }
+                else modified_obj = { "drivers" : result.drivers}
+                result.drivers = result.drivers.filter(element => {
+                    return element === req.body.username;
+                });
+                console.log("Y al final son: "+ result.drivers)
                 Database.collection("races").updateOne(
                     {_id: ObjectId(req.params.id)},
                     { $set: { "drivers" : result.drivers }},
