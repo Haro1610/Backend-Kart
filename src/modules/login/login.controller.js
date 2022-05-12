@@ -30,8 +30,8 @@ const LogInController = {
     });
   },
   checkGoogleToken:(req,res) =>{
-      console.log(req.body.idToken)
-      console.log("intentando")
+      //console.log(req.body.idToken)
+      //console.log("intentando")
       googleClient.verifyIdToken({
       idToken: req.body.idToken
     }).then((res.send({message:"todo bien"})))
