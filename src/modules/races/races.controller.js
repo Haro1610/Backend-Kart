@@ -116,7 +116,7 @@ const raceController = {
                 }
                 else modified_obj = { "drivers" : result.drivers}
                 result.drivers = result.drivers.filter(element => {
-                    return element === req.body.username;
+                    return !element === req.body.username;
                 });
                 console.log("Y al final son: "+ result.drivers)
                 Database.collection("races").updateOne(

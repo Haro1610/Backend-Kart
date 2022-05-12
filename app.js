@@ -7,6 +7,7 @@ const raceRouter = require('./src/modules/races/race.routes');
 const path = require('path');
 const Database = require('./src/core/database');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 const app = express(); 
 

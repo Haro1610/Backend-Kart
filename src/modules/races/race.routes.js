@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { isRegularExpressionLiteral } = require('typescript');
+const raceController = require('./races.controller');
 const racesController = require('./races.controller');
 /**
  * @swagger
@@ -64,5 +66,6 @@ router.get('/races/:id',racesController.getOne);
 router.post('/races',racesController.create);
 router.delete('/races/:id',racesController.delete);
 router.put('/races',racesController.update)
-router.put('/races/:id',racesController.joinRace)
+router.put('/races/:id',racesController.joinRace);
+router.post('/races/:id',raceController.leftRace)
 module.exports = router;
