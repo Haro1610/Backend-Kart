@@ -1,6 +1,7 @@
 const Database = require("../../core/database");
 const User = require("./user.model");
 
+
 const UsersController = {
     getAll: (req, res) => {
         const user = new User();

@@ -62,5 +62,7 @@ router.get('/races/:id',racesController.getOne);
   *           description: Create a new database entry with a race result info
   */
 router.post('/races',racesController.create);
-//router.delete('./users',userController.delete);
+router.delete('/races/:id',racesController.delete);
+router.put('/races',racesController.update)
+router.put('/races/:id',racesController.joinRace)
 module.exports = router;

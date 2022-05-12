@@ -1,5 +1,8 @@
 const Database = require("../../core/database");
 const Login = require("./login.model");
+const { OAuth2Client } = require('google-auth-library');
+const googleClient = new OAuth2Client(  '402060880190-hce6bc8gl31jgi9f8vava68h2ep0suf8.apps.googleusercontent.com');
+
 
 const LogInController = {
   updateOne: (req, res) => {
@@ -26,6 +29,13 @@ const LogInController = {
       }
     });
   },
+  checkGoogleToken:(req,res) =>{
+      //console.log(req.body.idToken)
+      //console.log("intentando")
+      googleClient.verifyIdToken({
+      idToken: req.body.idToken
+    }).then((res.send({message:"todo bien"})))
+  }
 };
 
 module.exports = LogInController;
