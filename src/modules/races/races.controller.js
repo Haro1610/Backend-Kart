@@ -30,6 +30,7 @@ const raceController = {
             "circuit": req.body.circuit, 
             "drivers": [],
             "capacity": req.body.capacity,
+            "image": req.body.image,
             "status": "open"
         };
         console.log(new_race)
@@ -59,11 +60,12 @@ const raceController = {
                 number_of_laps: req.body.number_of_laps,
                 date: req.body.date,
                 circuit: req.body.circuit, 
-                capacity: req.body.capacity
+                capacity: req.body.capacity,
+                image: req.body.image
             };
         Database.collection("races").updateOne(
         {_id: ObjectId(req.body._id)},
-        { $set: { "name" : updated_race.name , "number_of_laps" : updated_race.number_of_laps,"date": updated_race.date,"circuit": updated_race.circuit, "capacity": updated_race.capacity}},
+        { $set: { "name" : updated_race.name , "number_of_laps" : updated_race.number_of_laps,"date": updated_race.date,"circuit": updated_race.circuit, "capacity": updated_race.capacity, "image": updated_race.image}},
         function(err, res) {
             if (err){
                 console.log(err)
