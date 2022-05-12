@@ -64,4 +64,5 @@ router.get('/races/:id',racesController.getOne);
 router.post('/races',racesController.create);
 router.delete('/races/:id',racesController.delete);
 router.put('/races',racesController.update)
+router.put('/races/:id',racesController.joinRace)
 module.exports = router;

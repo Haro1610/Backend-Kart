@@ -2,6 +2,7 @@ const Database = require("../../core/database");
 const Race = require("./race.model");
 const { ObjectId } = require('mongodb');
 const { update } = require("../users/users.controller");
+const { resourceLimits } = require("worker_threads");
 
 
 const raceController = {
@@ -70,6 +71,31 @@ const raceController = {
             }
         });
         res.send({message:"se ha actualizado a : "+req.body.id})
+    },
+    joinRace:(req,res) => {
+        console.log("carrera a la que te unirás:"+req.params.id);
+        const race = new Race();
+        race.getOne(req.params.id).then(result => {
+            if(result) {
+                console.log("k onda, tu eres:"+ req.body.username)
+                console.log("los corredores iniciales son:" + result.drivers)
+                result.drivers.push(req.body.username);
+                console.log("Y al final son: "+ result.drivers)
+                Database.collection("races").updateOne(
+                    {_id: ObjectId(req.params.id)},
+                    { $set: { "drivers" : result.drivers }},
+                    function(err, res) {
+                        if (err){
+                            console.log(err)
+                            res.send({message: "Not updated"})
+                        }
+                    });
+            } else {
+                res.send({message:"No se encuentra la carrera"});
+            }
+        });
+        console.log("Añadido a la carrera")
+        res.send({message:"Bienvenido a la carrera"})
     }
 }
 
