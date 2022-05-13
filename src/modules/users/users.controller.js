@@ -25,7 +25,8 @@ const UsersController = {
             email: req.body.email,
             password: req.body.password,
             number: req.body.number,
-            picture: req.body.picture
+            picture: req.body.picture,
+            level: req.body.level
         };
         Database.collection("users").insertOne(new_user, function(err, res) {
         if(err) console.log("err");
@@ -50,11 +51,13 @@ const UsersController = {
             email: req.body.email,
             password: req.body.password,
             number: req.body.number,
-            picture: req.body.picture
+            picture: req.body.picture,
+            level: req.body.level
         };
         Database.collection("users").updateOne(
         {email: req.body.email},
-        { $set: { "username" : updated_user.username , "email" : updated_user.email,"password": updated_user.password,"number": req.body.number, "picture":updated_user.picture}},
+        { $set: { "username" : updated_user.username , 
+        "email" : updated_user.email,"password": updated_user.password,"number": req.body.number, "picture":updated_user.picture, "level":req.body.level}},
         function(err, res) {
             if (err){
                 console.log(err)
