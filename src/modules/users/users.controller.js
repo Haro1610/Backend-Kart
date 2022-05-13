@@ -1,5 +1,8 @@
 const Database = require("../../core/database");
 const User = require("./user.model");
+const jwt = require('jsonwebtoken');
+const { ObjectId } = require('mongodb');
+const { render } = require("express/lib/response");
 
 
 const UsersController = {
@@ -19,20 +22,25 @@ const UsersController = {
             }
         });
     },
-    create: (req, res) => {
+    create: (req, response) => {
         const new_user = {
             username:  req.body.username,
             email: req.body.email,
             password: req.body.password,
             number: req.body.number,
             picture: req.body.picture,
-            level: req.body.level
+            level: "user"
         };
-        Database.collection("users").insertOne(new_user, function(err, res) {
-        if(err) console.log("err");
-        else console.log("Todo bien")
-    });
-    res.send({token: "si" })
+        console.log(new_user)
+        jwt.sign({user:new_user}, 'secretkey', (err,token) =>{
+            if(err) response.send(401)
+            else{
+                Database.collection("users").insertOne(new_user, function(err, res) {
+                    if(err) render.send(401)
+                    else response.send({"token":token,"username":new_user.username})
+                });
+            }
+        });
     },
     delete: (req,res) => {
         console.log("vamos a borrar a :" +req.params.email)
@@ -45,7 +53,7 @@ const UsersController = {
     res.send({status: "Ok, hemos borrado a: "+req.params.email})
     },
     update: (req,res) => {
-        console.log("Vamos a actualizar: " + req.body.email +'  number: ' + req.body.number );
+        console.log("Vamos a actualizar: " + req.body._id +'  number: ' + req.body.number );
         const updated_user = {
             username:  req.body.username,
             email: req.body.email,
@@ -55,7 +63,7 @@ const UsersController = {
             level: req.body.level
         };
         Database.collection("users").updateOne(
-        {email: req.body.email},
+        {_id: ObjectId(req.body._id)},
         { $set: { "username" : updated_user.username , 
         "email" : updated_user.email,"password": updated_user.password,"number": req.body.number, "picture":updated_user.picture, "level":req.body.level}},
         function(err, res) {
