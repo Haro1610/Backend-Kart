@@ -4,10 +4,14 @@ const circuitRouter = require('./src/modules/circuits/circuit.routes');
 const LoginRouter = require('./src/modules/login/login.routes');
 const race_resultRouter = require('./src/modules/race_results/race_results.routes');
 const raceRouter = require('./src/modules/races/race.routes');
+const dotenv = require('dotenv');
 const path = require('path');
 const Database = require('./src/core/database');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+
+dotenv.config();
+
 
 const app = express(); 
 

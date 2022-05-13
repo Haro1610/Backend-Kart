@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
-const mongoUrl = 'mongodb+srv://kartsuser:Q8Tc4BdZM72mSUrl@kartapp.qvkrj.mongodb.net/pae-project?retryWrites=true&w=majority';
+const mongoUrl = process.env.MONGO_URL;
 
 const Database = {
     dbInstance: null,
