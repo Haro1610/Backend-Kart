@@ -1,17 +1,11 @@
 const Database = require("../../core/database");
 const Login = require("./login.model");
-const { OAuth2Client } = require('google-auth-library');
+const { OAuth2Client, JWT } = require('google-auth-library');
+const jsonwebtoken = require("jsonwebtoken");
 const googleClient = new OAuth2Client(  '402060880190-hce6bc8gl31jgi9f8vava68h2ep0suf8.apps.googleusercontent.com');
+const jwt = require('jsonwebtoken')
 
-
-const LogInController = {
-  updateOne: (req, res) => {
-    const login = new Login();
-    login.getOne(req.body).then((result) => {
-      if (result) {
-        usuario = result;
-        usuario.token = "si";
-        Database.collection("users").updateOne(
+        /*Database.collection("users").updateOne(
           { _id: usuario._id },
           { $set: usuario },
           function (err, response) {
@@ -21,9 +15,39 @@ const LogInController = {
               console.log("Se pudo");
             }
           }
+<<<<<<< HEAD
         );
         //res.sendStatus(200);}
         res.send({token: "si" ,username: usuario.username})
+=======
+        );*/
+const LogInController = {
+  updateOne: (req, res) => {
+    const login = new Login();
+    login.getOne(req.body).then((result) => {
+      if (result) {
+        console.log(result)
+        usuario = result;
+        jwt.sign({user:usuario}, 'secretkey', (err,token) =>{
+          usuario.token = token;
+          Database.collection("users").updateOne(
+            { _id: usuario._id },
+            { $set: usuario },
+            function (err, response) {
+              if (err) {
+                  res.sendStatus(404)
+              } else {
+                console.log("Se pudo");
+              }
+            }
+          );
+          jwt.verify(usuario.token,'secretkey',(err,data) => {
+            if(err) res.sendStatus(403);
+            else res.json({data})
+          })
+        })
+        //res.sendStatus(200);
+>>>>>>> b5ea07040f0222c1f801f3879b7d892a3622c02d
       } else {
         res.sendStatus(404);
       }

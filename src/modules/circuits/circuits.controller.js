@@ -26,7 +26,8 @@ const circuitController = {
             description: req.body.description,
             address: req.body.address,
             phone_number : req.body.phone_number,
-            circuit_distance: req.body.circuit_distance
+            circuit_distance: req.body.circuit_distance,
+            image: req.body.image
         };
         console.log(new_circuit)
         Database.collection("circuits").insertOne(new_circuit, function(err, res) {
@@ -53,11 +54,12 @@ const circuitController = {
             description: req.body.description,
             address: req.body.address,
             phone_number : req.body.phone_number,
-            circuit_distance: req.body.circuit_distance
+            circuit_distance: req.body.circuit_distance,
+            image: req.body.image
         };
         Database.collection("circuits").updateOne(
         {_id: ObjectId(req.body.id)},
-        { $set: { "name" : updated_circuit.name , "description" : updated_circuit.description,"address": updated_circuit.address,"phone_number": req.body.phone_number, "circuit_distance":updated_circuit.circuit_distance}},
+        { $set: { "name" : updated_circuit.name , "description" : updated_circuit.description,"address": updated_circuit.address,"phone_number": req.body.phone_number, "circuit_distance":updated_circuit.circuit_distance, "image":updated_circuit.image}},
         function(err, res) {
             if (err){
                 console.log(err)
