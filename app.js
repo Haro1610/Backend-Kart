@@ -9,7 +9,7 @@ const Database = require('./src/core/database');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
-const multer = require('multer');
+//const multer = require('multer');
 
 const app = express(); 
 
@@ -26,34 +26,34 @@ app.use("/assets", express.static(__dirname + "/public"));
 
 // });
 
-const multerOptions={
-    destination:(req,file,cb) =>{ 
-        cb(null,'public/images');
-    },
-    filename:(req,file,cb) =>{
-        const extension = file.originalname.split('.').pop();
-        cb(null,`kartImage-${new Date().getTime()}.${extension}`)
-    }
-}
+// const multerOptions={
+//     destination:(req,file,cb) =>{ 
+//         cb(null,'public/images');
+//     },
+//     filename:(req,file,cb) =>{
+//         const extension = file.originalname.split('.').pop();
+//         cb(null,`kartImage-${new Date().getTime()}.${extension}`)
+//     }
+// }
 
-const extensiones = ['png','jpg','jpeg','bmp','gif'];
+// const extensiones = ['png','jpg','jpeg','bmp','gif'];
 
-const fileFilter = (req,file,cb)=>{
-    const extension = file.originalname.split('.').pop().toLowerCase();
-    //const flag = extensiones.includes(extension);
-    const flag = file.mimetype.startsWith('image/');
-    cb(null,flag);
-}
+// const fileFilter = (req,file,cb)=>{
+//     const extension = file.originalname.split('.').pop().toLowerCase();
+//     //const flag = extensiones.includes(extension);
+//     const flag = file.mimetype.startsWith('image/');
+//     cb(null,flag);
+// }
 
-const multerStorage = multer.diskStorage(multerOptions);
+// const multerStorage = multer.diskStorage(multerOptions);
 
-const upload = multer({storage:multerStorage,fileFilter:fileFilter});
+// const upload = multer({storage:multerStorage,fileFilter:fileFilter});
 
-app.post('/file',upload.single('archivo'),(req,res)=>{
-    console.log('Archivo:',req.file);
-    res.send('aqui se suve el archivo');
+// app.post('/file',upload.single('archivo'),(req,res)=>{
+//     console.log('Archivo:',req.file);
+//     res.send('aqui se suve el archivo');
 
-})
+// })
 
 app.use('/api',userRouter);
 app.use('/api',circuitRouter);
