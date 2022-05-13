@@ -9,6 +9,8 @@ const Database = require('./src/core/database');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
+//const multer = require('multer');
+
 const app = express(); 
 
 
@@ -16,7 +18,42 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
-app.use("/", express.static(__dirname + "/public"));
+app.use("/assets", express.static(__dirname + "/public"));
+
+//muleter testing
+// app.post('/file',(req,res)=>{
+//     res.send('aqui se suve el archivo');
+
+// });
+
+// const multerOptions={
+//     destination:(req,file,cb) =>{ 
+//         cb(null,'public/images');
+//     },
+//     filename:(req,file,cb) =>{
+//         const extension = file.originalname.split('.').pop();
+//         cb(null,`kartImage-${new Date().getTime()}.${extension}`)
+//     }
+// }
+
+// const extensiones = ['png','jpg','jpeg','bmp','gif'];
+
+// const fileFilter = (req,file,cb)=>{
+//     const extension = file.originalname.split('.').pop().toLowerCase();
+//     //const flag = extensiones.includes(extension);
+//     const flag = file.mimetype.startsWith('image/');
+//     cb(null,flag);
+// }
+
+// const multerStorage = multer.diskStorage(multerOptions);
+
+// const upload = multer({storage:multerStorage,fileFilter:fileFilter});
+
+// app.post('/file',upload.single('archivo'),(req,res)=>{
+//     console.log('Archivo:',req.file);
+//     res.send('aqui se suve el archivo');
+
+// })
 
 app.use('/api',userRouter);
 app.use('/api',circuitRouter);
