@@ -15,11 +15,6 @@ const jwt = require('jsonwebtoken')
               console.log("Se pudo");
             }
           }
-<<<<<<< HEAD
-        );
-        //res.sendStatus(200);}
-        res.send({token: "si" ,username: usuario.username})
-=======
         );*/
 const LogInController = {
   updateOne: (req, res) => {
@@ -47,7 +42,6 @@ const LogInController = {
           })
         })
         //res.sendStatus(200);
->>>>>>> b5ea07040f0222c1f801f3879b7d892a3622c02d
       } else {
         res.sendStatus(404);
       }
