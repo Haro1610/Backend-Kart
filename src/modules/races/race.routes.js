@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { isRegularExpressionLiteral } = require('typescript');
+//const { isRegularExpressionLiteral } = require('typescript');
 const raceController = require('./races.controller');
 const racesController = require('./races.controller');
 /**
